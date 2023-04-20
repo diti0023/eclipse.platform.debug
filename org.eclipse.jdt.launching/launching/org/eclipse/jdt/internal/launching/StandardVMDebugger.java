@@ -147,6 +147,9 @@ public class StandardVMDebugger extends StandardVMRunner {
 	public String showCommandLine(VMRunnerConfiguration configuration, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor);
 
+		String tempOutputDir = createOutputDir();
+		configuration.setWorkingDirectory(tempOutputDir);
+
 		CommandDetails cmd = getCommandLine(configuration, launch, subMonitor);
 		if (subMonitor.isCanceled()) {
 			return ""; //$NON-NLS-1$
